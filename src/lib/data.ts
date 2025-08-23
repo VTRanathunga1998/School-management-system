@@ -1,5 +1,7 @@
 // TEMPORARY DATA
 
+import moment from "moment";
+
 export let role = "admin";
 
 export const teachersData = [
@@ -915,149 +917,144 @@ export const announcementsData = [
   },
 ];
 
-
 // YOU SHOULD CHANGE THE DATES OF THE EVENTS TO THE CURRENT DATE TO SEE THE EVENTS ON THE CALENDAR
 export const calendarEvents = [
   {
     title: "Math",
     allDay: false,
-    start: new Date(2024, 7, 12, 8, 0),
-    end: new Date(2024, 7, 12, 8, 45),
+    start: moment("2025-08-18 08:00").toDate(),
+    end: moment("2025-08-18 08:45").toDate(),
   },
   {
     title: "English",
     allDay: false,
-    start: new Date(2024, 7, 12, 9, 0),
-    end: new Date(2024, 7, 12, 9, 45),
+    start: moment("2025-08-18 09:00").toDate(),
+    end: moment("2025-08-18 09:45").toDate(),
   },
   {
     title: "Biology",
     allDay: false,
-    start: new Date(2024, 7, 12, 10, 0),
-    end: new Date(2024, 7, 12, 10, 45),
+    start: moment("2025-08-18 10:00").toDate(),
+    end: moment("2025-08-18 10:45").toDate(),
   },
   {
     title: "Physics",
     allDay: false,
-    start: new Date(2024, 7, 12, 11, 0),
-    end: new Date(2024, 7, 12, 11, 45),
+    start: moment("2025-08-18 11:00").toDate(),
+    end: moment("2025-08-18 11:45").toDate(),
   },
   {
     title: "Chemistry",
     allDay: false,
-    start: new Date(2024, 7, 12, 13, 0),
-    end: new Date(2024, 7, 12, 13, 45),
+    start: moment("2025-08-18 13:00").toDate(),
+    end: moment("2025-08-18 13:45").toDate(),
   },
   {
     title: "History",
     allDay: false,
-    start: new Date(2024, 7, 12, 14, 0),
-    end: new Date(2024, 7, 12, 14, 45),
+    start: moment("2025-08-18 14:00").toDate(),
+    end: moment("2025-08-18 14:45").toDate(),
   },
   {
     title: "English",
     allDay: false,
-    start: new Date(2024, 7, 13, 9, 0),
-    end: new Date(2024, 7, 13, 9, 45),
+    start: moment("2025-08-19 09:00").toDate(),
+    end: moment("2025-08-19 09:45").toDate(),
   },
   {
     title: "Biology",
     allDay: false,
-    start: new Date(2024, 7, 13, 10, 0),
-    end: new Date(2024, 7, 13, 10, 45),
+    start: moment("2025-08-19 10:00").toDate(),
+    end: moment("2025-08-19 10:45").toDate(),
   },
   {
     title: "Physics",
     allDay: false,
-    start: new Date(2024, 7, 13, 11, 0),
-    end: new Date(2024, 7, 13, 11, 45),
+    start: moment("2025-08-19 11:00").toDate(),
+    end: moment("2025-08-19 11:45").toDate(),
   },
-
   {
     title: "History",
     allDay: false,
-    start: new Date(2024, 7, 13, 14, 0),
-    end: new Date(2024, 7, 13, 14, 45),
+    start: moment("2025-08-19 14:00").toDate(),
+    end: moment("2025-08-19 14:45").toDate(),
   },
   {
     title: "Math",
     allDay: false,
-    start: new Date(2024, 7, 14, 8, 0),
-    end: new Date(2024, 7, 14, 8, 45),
+    start: moment("2025-08-20 08:00").toDate(),
+    end: moment("2025-08-20 08:45").toDate(),
   },
   {
     title: "Biology",
     allDay: false,
-    start: new Date(2024, 7, 14, 10, 0),
-    end: new Date(2024, 7, 14, 10, 45),
+    start: moment("2025-08-20 10:00").toDate(),
+    end: moment("2025-08-20 10:45").toDate(),
   },
-
   {
     title: "Chemistry",
     allDay: false,
-    start: new Date(2024, 7, 14, 13, 0),
-    end: new Date(2024, 7, 14, 13, 45),
+    start: moment("2025-08-20 13:00").toDate(),
+    end: moment("2025-08-20 13:45").toDate(),
   },
   {
     title: "History",
     allDay: false,
-    start: new Date(2024, 7, 14, 14, 0),
-    end: new Date(2024, 7, 13, 14, 45),
+    start: moment("2025-08-20 14:00").toDate(),
+    end: moment("2025-08-20 14:45").toDate(),
   },
   {
     title: "English",
     allDay: false,
-    start: new Date(2024, 7, 15, 9, 0),
-    end: new Date(2024, 7, 15, 9, 45),
+    start: moment("2025-08-21 09:00").toDate(),
+    end: moment("2025-08-21 09:45").toDate(),
   },
   {
     title: "Biology",
     allDay: false,
-    start: new Date(2024, 7, 15, 10, 0),
-    end: new Date(2024, 7, 15, 10, 45),
+    start: moment("2025-08-21 10:00").toDate(),
+    end: moment("2025-08-21 10:45").toDate(),
   },
   {
     title: "Physics",
     allDay: false,
-    start: new Date(2024, 7, 15, 11, 0),
-    end: new Date(2024, 7, 15, 11, 45),
+    start: moment("2025-08-21 11:00").toDate(),
+    end: moment("2025-08-21 11:45").toDate(),
   },
-
   {
     title: "History",
     allDay: false,
-    start: new Date(2024, 7, 15, 14, 0),
-    end: new Date(2024, 7, 15, 14, 45),
+    start: moment("2025-08-21 14:00").toDate(),
+    end: moment("2025-08-21 14:45").toDate(),
   },
   {
     title: "Math",
     allDay: false,
-    start: new Date(2024, 7, 16, 8, 0),
-    end: new Date(2024, 7, 16, 8, 45),
+    start: moment("2025-08-22 08:00").toDate(),
+    end: moment("2025-08-22 08:45").toDate(),
   },
   {
     title: "English",
     allDay: false,
-    start: new Date(2024, 7, 16, 9, 0),
-    end: new Date(2024, 7, 16, 9, 45),
+    start: moment("2025-08-22 09:00").toDate(),
+    end: moment("2025-08-22 09:45").toDate(),
   },
-
   {
     title: "Physics",
     allDay: false,
-    start: new Date(2024, 7, 16, 11, 0),
-    end: new Date(2024, 7, 16, 11, 45),
+    start: moment("2025-08-22 11:00").toDate(),
+    end: moment("2025-08-22 11:45").toDate(),
   },
   {
     title: "Chemistry",
     allDay: false,
-    start: new Date(2024, 7, 16, 13, 0),
-    end: new Date(2024, 7, 16, 13, 45),
+    start: moment("2025-08-22 13:00").toDate(),
+    end: moment("2025-08-22 13:45").toDate(),
   },
   {
     title: "History",
     allDay: false,
-    start: new Date(2024, 7, 16, 14, 0),
-    end: new Date(2024, 7, 16, 14, 45),
+    start: moment("2025-08-22 14:00").toDate(),
+    end: moment("2025-08-22 14:45").toDate(),
   },
 ];
