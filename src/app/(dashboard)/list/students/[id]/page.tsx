@@ -154,7 +154,10 @@ export default function SingleStudentPage() {
             <Link className="p-3 rounded-md bg-lamaPurpleLight" href="/">
               Student&apos;s Results
             </Link>
-            <Link className="p-3 rounded-md bg-lamaYellowLight" href="/">
+            <Link
+              className="p-3 rounded-md bg-lamaYellowLight"
+              href={`/list/lessons?classId=${2}`}
+            >
               Student&apos;s Lessons
             </Link>
             <Link className="p-3 rounded-md bg-pink-50" href="/">
