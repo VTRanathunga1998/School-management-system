@@ -82,6 +82,9 @@ export default async function LessonListPage({
               { subject: { name: { contains: value, mode: "insensitive" } } },
               { teacher: { name: { contains: value, mode: "insensitive" } } },
             ];
+
+          default:
+            break;
         }
       }
     }
