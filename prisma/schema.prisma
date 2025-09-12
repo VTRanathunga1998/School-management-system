@@ -70,7 +70,7 @@ model Grade {
   level Int @unique
 
   students Student[]
-  classes Class[]
+  classess Class[]
 }
 
 model Class {
