@@ -2,8 +2,6 @@
 
 import moment from "moment";
 
-export let role = "admin";
-
 export const teachersData = [
   {
     id: 1,
