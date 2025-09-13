@@ -2,10 +2,15 @@ import Announcements from "@/components/Announcements";
 import AttendanceChartContainer from "@/components/AttendanceChartContainer";
 import CountChartContainer from "@/components/CountChartContainer";
 import EventCalendar from "@/components/EventCalendar";
+import EventCalendarContainer from "@/components/EventCalendarContainer";
 import FinanceChart from "@/components/FinanceChart";
 import UserCard from "@/components/UserCard";
 
-export default function AdminPage() {
+const AdminPage = ({
+  searchParams,
+}: {
+  searchParams: { [keys: string]: string | undefined };
+}) => {
   return (
     <div className="p-4 flex flex-col gap-4 md:flex-row ">
       {/*LEFT*/}
@@ -35,9 +40,11 @@ export default function AdminPage() {
       </div>
       {/*RIGHT*/}
       <div className="w-full md:w-1/3 flex flex-col gap-8">
-        <EventCalendar />
+        <EventCalendarContainer searchParams={searchParams} />
         <Announcements />
       </div>
     </div>
   );
-}
+};
+
+export default AdminPage;
