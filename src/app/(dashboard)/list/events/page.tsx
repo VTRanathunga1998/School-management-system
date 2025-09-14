@@ -56,17 +56,17 @@ const renderRow = (item: EventList) => (
     <td className="p-4">{item.title}</td>
     <td className="p-4">{item.class?.name || "-"}</td>
     <td className="p-4 hidden md:table-cell">
-      {new Intl.DateTimeFormat("en-US").format(item.startTime)}
+      {new Intl.DateTimeFormat("en-LK").format(item.startTime)}
     </td>
     <td className="p-4 hidden md:table-cell">
-      {item.startTime.toLocaleTimeString("en-US", {
+      {item.startTime.toLocaleTimeString("en-LK", {
         hour: "2-digit",
         minute: "2-digit",
         hour12: false,
       })}
     </td>
     <td className="p-4 hidden md:table-cell">
-      {item.endTime.toLocaleTimeString("en-US", {
+      {item.endTime.toLocaleTimeString("en-LK", {
         hour: "2-digit",
         minute: "2-digit",
         hour12: false,

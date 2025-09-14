@@ -76,7 +76,7 @@ const renderRow = (item: ResultList) => (
     </td>
     <td className="p-4 hidden md:table-cell">{item.className}</td>
     <td className="p-4 hidden md:table-cell">
-      {new Intl.DateTimeFormat("en-US").format(item.startTime)}
+      {new Intl.DateTimeFormat("en-LK").format(item.startTime)}
     </td>
     <td className="p-4">
       <div className="flex items-center gap-2">

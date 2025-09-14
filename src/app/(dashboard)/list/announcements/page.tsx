@@ -42,7 +42,7 @@ const renderRow = (item: AnnouncementList) => (
     <td className="p-4">{item.title}</td>
     <td className="p-4">{item.class?.name || "-"}</td>
     <td className="p-4 hidden md:table-cell">
-      {new Intl.DateTimeFormat("en-US").format(item.date)}
+      {new Intl.DateTimeFormat("en-LK").format(item.date)}
     </td>
 
     <td className="p-4">

@@ -1,7 +1,10 @@
 import Announcements from "@/components/Announcements";
-import BigCalendar from "@/components/BigCalendar";
+import BigCalendarContainer from "@/components/BigCalendarContainer";
+import { auth } from "@clerk/nextjs/server";
 
 export default function TeacherPage() {
+  const { userId } = auth();
+
   return (
     <div className="flex-1 p-4 flex flex-col gap-4 xl:flex-row ">
       {/* LEFT */}
@@ -13,7 +16,7 @@ export default function TeacherPage() {
           <div className="h-full overflow-x-auto">
             {/* Min width applied to inner content */}
             <div className="min-w-[800px] h-full md:w-full">
-              <BigCalendar />
+              <BigCalendarContainer type="teacherId" id={userId!} />
             </div>
           </div>
         </div>
