@@ -4,7 +4,7 @@ import Image from "next/image";
 import { useState, useEffect, SetStateAction, Dispatch } from "react";
 import dynamic from "next/dynamic";
 import { useFormState } from "react-dom";
-import { deleteSubject } from "@/lib/actions";
+import { deleteClass, deleteSubject, deleteTeacher } from "@/lib/actions";
 import { useRouter } from "next/navigation";
 import { toast } from "react-toastify";
 import { FormContainerProps } from "./FormContainer";
@@ -13,10 +13,9 @@ type FormModalProps = FormContainerProps;
 
 const deleteActionMap = {
   subject: deleteSubject,
+  class: deleteClass,
+  teacher: deleteTeacher,
   // TODO: OTHER DELETE ACTIONS
-
-  class: deleteSubject,
-  teacher: deleteSubject,
   student: deleteSubject,
   exam: deleteSubject,
   parent: deleteSubject,
@@ -37,6 +36,9 @@ const StudentForm = dynamic(() => import("./forms/StudentForm"), {
 const SubjectForm = dynamic(() => import("./forms/SubjectForm"), {
   loading: () => <h1>Loading...</h1>,
 });
+const ClassForm = dynamic(() => import("./forms/ClassForm"), {
+  loading: () => <h1>Loading...</h1>,
+});
 
 const forms: {
   [key: string]: (
@@ -54,6 +56,14 @@ const forms: {
       relatedData={relatedData}
     />
   ),
+  class: (setOpen, type, data, relatedData) => (
+    <ClassForm
+      type={type}
+      data={data}
+      setOpen={setOpen}
+      relatedData={relatedData}
+    />
+  ),
   teacher: (setOpen, type, data, relatedData) => (
     <TeacherForm
       type={type}
@@ -62,14 +72,14 @@ const forms: {
       relatedData={relatedData}
     />
   ),
-  student: (setOpen, type, data, relatedData) => (
-    <StudentForm
-      type={type}
-      data={data}
-      setOpen={setOpen}
-      relatedData={relatedData}
-    />
-  ),
+  // student: (setOpen, type, data, relatedData) => (
+  //   <StudentForm
+  //     type={type}
+  //     data={data}
+  //     setOpen={setOpen}
+  //     relatedData={relatedData}
+  //   />
+  // ),
 };
 
 export default function FormModal({
@@ -79,8 +89,6 @@ export default function FormModal({
   id,
   relatedData,
 }: FormModalProps) {
-  console.log("rela ", relatedData);
-
   const size = type === "create" ? "w-8 h-8" : "w-7 h-7";
   const bgColor =
     type === "create"
@@ -135,8 +143,6 @@ export default function FormModal({
       "Form not found!"
     );
   };
-
-  // console.log("Rela ", relatedData);
 
   return (
     <>
