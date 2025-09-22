@@ -45,9 +45,9 @@ const SubjectForm = dynamic(() => import("./forms/SubjectForm"), {
 const ClassForm = dynamic(() => import("./forms/ClassForm"), {
   loading: () => <h1>Loading...</h1>,
 });
-// const ExamForm = dynamic(() => import("./forms/ExamForm"), {
-//   loading: () => <h1>Loading...</h1>,
-// });
+const ExamForm = dynamic(() => import("./forms/ExamForm"), {
+  loading: () => <h1>Loading...</h1>,
+});
 // TODO: OTHER FORMS
 
 const forms: {
@@ -90,15 +90,15 @@ const forms: {
       relatedData={relatedData}
     />
   ),
-  // exam: (setOpen, type, data, relatedData) => (
-  //   <ExamForm
-  //     type={type}
-  //     data={data}
-  //     setOpen={setOpen}
-  //     relatedData={relatedData}
-  //   />
-  //   // TODO OTHER LIST ITEMS
-  // ),
+  exam: (setOpen, type, data, relatedData) => (
+    <ExamForm
+      type={type}
+      data={data}
+      setOpen={setOpen}
+      relatedData={relatedData}
+    />
+    // TODO OTHER LIST ITEMS
+  ),
 };
 
 const FormModal = ({
