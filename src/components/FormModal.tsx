@@ -1,23 +1,27 @@
 "use client";
 
-import Image from "next/image";
-import { useState, useEffect, SetStateAction, Dispatch } from "react";
+import {
+  deleteClass,
+  // deleteExam,
+  deleteStudent,
+  deleteSubject,
+  deleteTeacher,
+} from "@/lib/actions";
 import dynamic from "next/dynamic";
-import { useFormState } from "react-dom";
-import { deleteClass, deleteSubject, deleteTeacher } from "@/lib/actions";
+import Image from "next/image";
 import { useRouter } from "next/navigation";
+import { Dispatch, SetStateAction, useEffect, useState } from "react";
+import { useFormState } from "react-dom";
 import { toast } from "react-toastify";
 import { FormContainerProps } from "./FormContainer";
-
-type FormModalProps = FormContainerProps;
 
 const deleteActionMap = {
   subject: deleteSubject,
   class: deleteClass,
   teacher: deleteTeacher,
+  student: deleteStudent,
+  exam: deleteStudent,
   // TODO: OTHER DELETE ACTIONS
-  student: deleteSubject,
-  exam: deleteSubject,
   parent: deleteSubject,
   lesson: deleteSubject,
   assignment: deleteSubject,
@@ -26,6 +30,8 @@ const deleteActionMap = {
   event: deleteSubject,
   announcement: deleteSubject,
 };
+
+// USE LAZY LOADING
 
 const TeacherForm = dynamic(() => import("./forms/TeacherForm"), {
   loading: () => <h1>Loading...</h1>,
@@ -39,6 +45,10 @@ const SubjectForm = dynamic(() => import("./forms/SubjectForm"), {
 const ClassForm = dynamic(() => import("./forms/ClassForm"), {
   loading: () => <h1>Loading...</h1>,
 });
+// const ExamForm = dynamic(() => import("./forms/ExamForm"), {
+//   loading: () => <h1>Loading...</h1>,
+// });
+// TODO: OTHER FORMS
 
 const forms: {
   [key: string]: (
@@ -72,23 +82,32 @@ const forms: {
       relatedData={relatedData}
     />
   ),
-  // student: (setOpen, type, data, relatedData) => (
-  //   <StudentForm
+  student: (setOpen, type, data, relatedData) => (
+    <StudentForm
+      type={type}
+      data={data}
+      setOpen={setOpen}
+      relatedData={relatedData}
+    />
+  ),
+  // exam: (setOpen, type, data, relatedData) => (
+  //   <ExamForm
   //     type={type}
   //     data={data}
   //     setOpen={setOpen}
   //     relatedData={relatedData}
   //   />
+  //   // TODO OTHER LIST ITEMS
   // ),
 };
 
-export default function FormModal({
+const FormModal = ({
   table,
   type,
   data,
   id,
   relatedData,
-}: FormModalProps) {
+}: FormContainerProps & { relatedData?: any }) => {
   const size = type === "create" ? "w-8 h-8" : "w-7 h-7";
   const bgColor =
     type === "create"
@@ -98,18 +117,6 @@ export default function FormModal({
       : "bg-lamaPurple";
 
   const [open, setOpen] = useState(false);
-
-  // Prevent body scroll when modal is open
-  useEffect(() => {
-    if (open) {
-      document.body.style.overflow = "hidden";
-    } else {
-      document.body.style.overflow = "";
-    }
-    return () => {
-      document.body.style.overflow = "";
-    };
-  }, [open]);
 
   const Form = () => {
     const [state, formAction] = useFormState(deleteActionMap[table], {
@@ -153,7 +160,7 @@ export default function FormModal({
         <Image src={`/${type}.png`} alt="" width={16} height={16} />
       </button>
       {open && (
-        <div className="fixed inset-0 bg-black bg-opacity-60 z-50 flex items-center justify-center">
+        <div className="w-screen h-screen absolute left-0 top-0 bg-black bg-opacity-60 z-50 flex items-center justify-center">
           <div className="bg-white p-4 rounded-md relative w-[90%] md:w-[70%] lg:w-[60%] xl:w-[50%] 2xl:w-[40%]">
             <Form />
             <div
@@ -167,4 +174,6 @@ export default function FormModal({
       )}
     </>
   );
-}
+};
+
+export default FormModal;

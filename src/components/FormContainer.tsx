@@ -19,7 +19,6 @@ export type FormContainerProps = {
   type: "create" | "update" | "delete";
   data?: any;
   id?: number | string;
-  relatedData?: any; 
 };
 
 const FormContainer = async ({ table, type, data, id }: FormContainerProps) => {
@@ -35,16 +34,8 @@ const FormContainer = async ({ table, type, data, id }: FormContainerProps) => {
         const subjectTeachers = await prisma.teacher.findMany({
           select: { id: true, name: true, surname: true },
         });
-
-        // Make sure everything is serializable
-        relatedData = {
-          teachers: subjectTeachers.map((t) => ({
-            ...t,
-            id: String(t.id),
-          })),
-        };
+        relatedData = { teachers: subjectTeachers };
         break;
-
       case "class":
         const classGrades = await prisma.grade.findMany({
           select: { id: true, level: true },
