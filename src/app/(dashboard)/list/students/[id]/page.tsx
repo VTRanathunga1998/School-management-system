@@ -2,11 +2,36 @@ import Announcements from "@/components/Announcements";
 import BigCalendar from "@/components/BigCalendar";
 import FormModal from "@/components/FormModal";
 import Performance from "@/components/Performance";
-import { role } from "@/lib/data";
+import StudentAttendanceCard from "@/components/StudentAttendanceCard";
+import prisma from "@/lib/prisma";
+import { auth } from "@clerk/nextjs/server";
+import { Class, Student } from "@prisma/client";
 import Image from "next/image";
 import Link from "next/link";
+import { notFound } from "next/navigation";
+import { Suspense } from "react";
 
-export default function SingleStudentPage() {
+export default async function SingleStudentPage({
+  params: { id },
+}: {
+  params: { id: string };
+}) {
+  const { sessionClaims } = auth();
+  const role = (sessionClaims?.metadata as { role?: string })?.role;
+
+  const student:
+    | (Student & { class: Class & { _count: { lessons: number } } })
+    | null = await prisma.student.findUnique({
+    where: { id },
+    include: {
+      class: { include: { _count: { select: { lessons: true } } } },
+    },
+  });
+
+  if (!student) {
+    return notFound();
+  }
+
   return (
     <div className="flex-1 p-4 flex flex-col gap-4 xl:flex-row">
       {/* LEFT  */}
@@ -17,7 +42,7 @@ export default function SingleStudentPage() {
           <div className="bg-lamaSky py-6 px-4 rounded-md flex-1 flex gap-4">
             <div className="w-1/3">
               <Image
-                src="https://images.pexels.com/photos/2182970/pexels-photo-2182970.jpeg?auto=compress&cs=tinysrgb&w=1200"
+                src={student.img || "/noAvatar.png"}
                 alt=""
                 width={144}
                 height={144}
@@ -26,26 +51,11 @@ export default function SingleStudentPage() {
             </div>
             <div className="w-2/3 flex flex-col justify between gap-4 ">
               <div className="flex items-center gap-4">
-                <h1 className="text-xl font-semibold">Leonard Snyder</h1>
+                <h1 className="text-xl font-semibold">
+                  {student.name + " " + student.surname}
+                </h1>
                 {role === "admin" && (
-                  <FormModal
-                    table="student"
-                    type="update"
-                    data={{
-                      id: 1,
-                      username: "deanguerrero",
-                      email: "deanguerrero@gmail.com",
-                      password: "password",
-                      firstName: "Dean",
-                      lastName: "Guerrero",
-                      phone: "+1 234 567 89",
-                      address: "1234 Main St, Anytown, USA",
-                      bloodType: "A+",
-                      dateOfBirth: "2000-01-01",
-                      sex: "male",
-                      img: "https://images.pexels.com/photos/2182970/pexels-photo-2182970.jpeg?auto=compress&cs=tinysrgb&w=1200",
-                    }}
-                  />
+                  <FormModal table="student" type="update" data={student} />
                 )}
               </div>
               <p className="text-sm text-gray-500">
@@ -55,19 +65,21 @@ export default function SingleStudentPage() {
               <div className="flex items-center justify-between gap-2 flex-wrap text-xs font-medium">
                 <div className="w-full md:w-1/3  lg:w-full flex items-center gap-2">
                   <Image src="/blood.png" alt="" width={14} height={14} />
-                  <span className="text-xs">A+</span>
+                  <span className="text-xs">{student.bloodType}</span>
                 </div>
                 <div className="w-full md:w-1/3  lg:w-full flex items-center gap-2">
                   <Image src="/date.png" alt="" width={14} height={14} />
-                  <span className="text-xs">January 2025</span>
+                  <span className="text-xs">
+                    {new Intl.DateTimeFormat("en-LK").format(student.birthday)}
+                  </span>
                 </div>
                 <div className="w-full md:w-1/3  lg:w-full flex items-center gap-2">
                   <Image src="/mail.png" alt="" width={14} height={14} />
-                  <span className="text-xs">user@gmail.com</span>
+                  <span className="text-xs">{student.email || "-"}</span>
                 </div>
                 <div className="w-full md:w-1/3  lg:w-full flex items-center gap-2">
                   <Image src="/phone.png" alt="" width={14} height={14} />
-                  <span className="text-xs">+94715285066</span>
+                  <span className="text-xs">{student.email || "-"}</span>
                 </div>
               </div>
             </div>
@@ -83,10 +95,9 @@ export default function SingleStudentPage() {
                 height={24}
                 className="w-6 h-6"
               />
-              <div>
-                <h1 className=" font-semibold">6th</h1>
-                <span className="text-sm text-gray-400">Grade</span>
-              </div>
+              <Suspense fallback="loading....">
+                <StudentAttendanceCard id={student.id}/>
+              </Suspense>
             </div>
             {/* CARD */}
             <div className="bg-white p-4 rounded-md flex items-center gap-4 w-full md:w-[45%] 2xl:w-[47%]">
@@ -98,7 +109,7 @@ export default function SingleStudentPage() {
                 className="w-6 h-6"
               />
               <div>
-                <h1 className="text-xl font-semibold">2</h1>
+                <h1 className="text-xl font-semibold">{2}</h1>
                 <span className="text-sm text-gray-400">Branches</span>
               </div>
             </div>
@@ -112,7 +123,9 @@ export default function SingleStudentPage() {
                 className="w-6 h-6"
               />
               <div>
-                <h1 className="text-xl font-semibold">18</h1>
+                <h1 className="text-xl font-semibold">
+                  {student.class._count.lessons}
+                </h1>
                 <span className="text-sm text-gray-400">Lessons</span>
               </div>
             </div>
@@ -126,7 +139,7 @@ export default function SingleStudentPage() {
                 className="w-6 h-6"
               />
               <div>
-                <h1 className="text-xl font-semibold">6A</h1>
+                <h1 className="text-xl font-semibold">{student.class.name}</h1>
                 <span className="text-sm text-gray-400">Class</span>
               </div>
             </div>

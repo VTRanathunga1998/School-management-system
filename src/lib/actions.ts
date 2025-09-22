@@ -137,7 +137,7 @@ export const createTeacher = async (
       password: data.password,
       firstName: data.name,
       lastName: data.surname,
-      publicMetadata:{role:"teacher"}
+      publicMetadata: { role: "teacher" },
     });
 
     await prisma.teacher.create({
@@ -197,6 +197,7 @@ export const updateTeacher = async (
         phone: data.phone || null,
         address: data.address,
         img: data.img || null,
+        ...(data.img !== null && { img: data.img }),
         bloodType: data.bloodType,
         sex: data.sex,
         birthday: data.birthday,
